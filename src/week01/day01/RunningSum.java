@@ -28,16 +28,47 @@ public class RunningSum {
     public static void main(String[] args) {
         RunningSum solution = new RunningSum();
 
-        int[] input = {2, 5, 1, 3};
-        int[] expected = {2, 7, 8, 11};
-
-        int[] actual = solution.runningSum(input);
-
-        System.out.println("Input:    " + Arrays.toString(input));
-        System.out.println("Expected: " + Arrays.toString(expected));
-        System.out.println("Actual:   " + Arrays.toString(actual));
-        System.out.println(
-                "Passed:   " + Arrays.equals(expected, actual)
+        test(
+                solution,
+                new int[]{2, 5, 1, 3},
+                new int[]{2, 7, 8, 11},
+                "Normal positive test case"
         );
+
+        test(
+                solution,
+                new int[]{5},
+                new int[]{5},
+                "Single Element test case"
+        );
+
+        test(
+                solution,
+                new int[]{0,0,0},
+                new int[]{0,0,0},
+                "All zeros test case"
+        );
+
+        test(
+                solution,
+                new int[] {-2, -3, -1, 4},
+                new int[] {-2, -5, -6, -2},
+                "Negative & negative numbers test case"
+        );
+    }
+    private static void test(
+            RunningSum solution,
+            int[] input,
+            int[] expected,
+            String testName
+    ){
+        int[] actual = solution.runningSum(input.clone());
+        boolean passed = Arrays.equals(actual, expected);
+        System.out.println("Test :   "+ testName);
+        System.out.println("Input:   "+Arrays.toString(input));
+        System.out.println("Expected: "+Arrays.toString(expected));
+        System.out.println("Actual:   "+Arrays.toString(actual));
+        System.out.println("Result:   "+(passed ? "Pass " : "Fail"));
+        System.out.println();
     }
 }
